@@ -10,5 +10,14 @@
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      window.addEventListener('load', () => {
+        const vw = document.documentElement.clientWidth;
+        const offenders = [...document.querySelectorAll('*')]
+          .filter(el => el.scrollWidth > vw + 1)
+          .map(el => ({ tag: el.tagName, class: el.className, scrollWidth: el.scrollWidth, viewport: vw }));
+        alert(JSON.stringify(offenders.slice(0, 5), null, 2) || 'No overflow found, viewport=' + vw);
+      });
+    </script>
   </body>
 </html>
