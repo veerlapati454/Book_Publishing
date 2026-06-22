@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import "./Contact.css";
-
+import { Link } from "react-router-dom";
 /* ── Scroll reveal (same pattern as Books.jsx / Authors.jsx) ── */
 function useReveal() {
   const ref = useRef(null);
@@ -149,10 +149,10 @@ export default function Contact() {
             </div>
 
             <div className="contact-socials">
-              <a href="#" aria-label="Instagram" className="social-link">IG</a>
-              <a href="#" aria-label="Twitter / X" className="social-link">X</a>
-              <a href="#" aria-label="LinkedIn" className="social-link">in</a>
-            </div>
+  <Link to="/404" aria-label="Instagram" className="social-link">IG</Link>
+  <Link to="/404" aria-label="Twitter / X" className="social-link">X</Link>
+  <Link to="/404" aria-label="LinkedIn" className="social-link">in</Link>
+</div>
           </Reveal>
 
           {/* Form column */}
