@@ -1,0 +1,345 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600;700&display=swap');
+
+/* ============================================================
+   TOKENS (mirrors Books.css / Authors.css / Contact.css)
+   ============================================================ */
+.login-page {
+  --ink: #0c0b0a;
+  --surface: #15130f;
+  --surface-2: #1c1914;
+  --card: #181511;
+  --border: rgba(201, 162, 75, 0.14);
+  --border-soft: rgba(237, 231, 220, 0.08);
+  --gold: #c9a24b;
+  --gold-bright: #e6c374;
+  --paper: #ede7dc;
+  --paper-dim: #b3ad9f;
+  --muted: #847d6e;
+  --error: #d97a6c;
+  --shadow: 0 20px 60px -20px rgba(0, 0, 0, 0.7);
+
+  --serif: 'Fraunces', Georgia, serif;
+  --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+ margin-top: 40px;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--sans);
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 2rem;
+  padding-top: clamp(3rem, 8vh, 6rem);
+  overflow: hidden;
+}
+
+.login-page * { box-sizing: border-box; }
+
+.login-page::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.login-page::after {
+  content: "";
+  position: fixed;
+  inset: -20% -10%;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 50% 45% at 18% 12%, rgba(201, 162, 75, 0.12), transparent 70%),
+    radial-gradient(ellipse 45% 40% at 85% 90%, rgba(201, 162, 75, 0.07), transparent 70%);
+}
+
+/* ============================================================
+   CARD
+   ============================================================ */
+.login-container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 420px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  padding: 2rem 2.6rem 2.8rem;
+  text-align: center;
+  animation: riseIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes riseIn {
+  from { opacity: 0; transform: translateY(18px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ============================================================
+   BACK BUTTON (now inline, top of the card)
+   ============================================================ */
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--paper-dim);
+  text-decoration: none;
+  margin-bottom: 1.6rem;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+.back-btn:hover {
+  color: var(--gold-bright);
+  transform: translateX(-2px);
+}
+.back-btn svg { font-size: 0.9rem; }
+
+.login-icon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 1.5rem;
+  border-radius: 50%;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  box-shadow: 0 0 0 6px rgba(201, 162, 75, 0.05);
+}
+
+.login-container h1 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 1.9rem;
+  color: var(--paper);
+  margin: 0 0 0.5rem;
+  line-height: 1.2;
+}
+
+.login-container > p {
+  font-size: 0.92rem;
+  color: var(--paper-dim);
+  margin: 0 0 2.2rem;
+}
+
+/* ============================================================
+   FORM
+   ============================================================ */
+.login-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.3rem;
+  text-align: left;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.input-group label {
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--paper-dim);
+}
+
+/* ── Role select ── */
+.role-select {
+  width: 100%;
+  background: var(--surface-2);
+  border: 1px solid var(--border-soft);
+  border-radius: 9px;
+  padding: 0.85rem 2.4rem 0.85rem 1rem;
+  font-family: var(--sans);
+  font-size: 0.92rem;
+  color: var(--paper);
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9'%3E%3Cpath d='M1 1l6 6 6-6' stroke='%23c9a24b' stroke-width='1.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+.role-select:focus {
+  border-color: var(--gold);
+  background-color: var(--card);
+}
+.role-select option {
+  background: var(--surface-2);
+  color: var(--paper);
+}
+
+/* ── Email / password fields ── */
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon {
+  position: absolute;
+  left: 14px;
+  color: var(--muted);
+  font-size: 0.95rem;
+  pointer-events: none;
+  transition: color 0.2s ease;
+}
+
+.input-wrapper input {
+  width: 100%;
+  background: var(--surface-2);
+  border: 1px solid var(--border-soft);
+  border-radius: 9px;
+  padding: 0.85rem 1rem;
+  font-family: var(--sans);
+  font-size: 0.92rem;
+  color: var(--paper);
+  outline: none;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+/* indent when an icon is present (email field) */
+.input-wrapper:has(.input-icon) input {
+  padding-left: 2.6rem;
+}
+
+/* indent on the right when the eye toggle is present (password field) */
+.input-wrapper:has(.eye-btn) input {
+  padding-right: 2.6rem;
+}
+
+.input-wrapper input::placeholder { color: var(--muted); }
+
+.input-wrapper input:focus {
+  border-color: var(--gold);
+  background: var(--card);
+}
+
+.input-wrapper:focus-within .input-icon {
+  color: var(--gold);
+}
+
+/* ── Disable Edge/IE's native "reveal password" icon ──
+   Edge (Chromium) injects its own eye toggle inside
+   type="password" inputs. Without this, it renders on
+   top of / next to our custom .eye-btn, producing a
+   double-eye-icon look. */
+.input-wrapper input[type="password"]::-ms-reveal,
+.input-wrapper input[type="password"]::-ms-clear {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+.eye-btn {
+  position: absolute;
+  right: 12px;
+  background: none;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 0.95rem;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: color 0.2s ease;
+  z-index: 2;
+}
+.eye-btn:hover { color: var(--gold-bright); }
+
+/* ============================================================
+   ERROR MESSAGE
+   ============================================================ */
+.login-error {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(217, 122, 108, 0.1);
+  border: 1px solid rgba(217, 122, 108, 0.3);
+  color: var(--error);
+  font-size: 0.84rem;
+  font-weight: 500;
+  padding: 0.75rem 1rem;
+  border-radius: 9px;
+  margin: -0.4rem 0 0;
+  animation: shake 0.3s ease;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+
+/* ============================================================
+   FORGOT PASSWORD
+   ============================================================ */
+.forgot-password {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: -0.5rem;
+}
+.forgot-password a {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--gold);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.forgot-password a:hover { color: var(--gold-bright); text-decoration: underline; }
+
+/* ============================================================
+   SUBMIT BUTTON
+   ============================================================ */
+.login1-btn {
+  font-family: var(--sans);
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #161310;
+  background: linear-gradient(180deg, var(--gold-bright), var(--gold));
+  border: none;
+  border-radius: 9px;
+  padding: 0.9rem 1.8rem;
+  cursor: pointer;
+  margin-top: 0.4rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+  box-shadow: 0 8px 24px -8px rgba(201, 162, 75, 0.45);
+}
+.login1-btn:hover { transform: translateY(-2px); filter: brightness(1.06); }
+.login1-btn:active { transform: translateY(0); }
+
+.signup-link {
+  text-align: center;
+  font-size: 0.86rem;
+  color: var(--paper-dim);
+  margin: 0.2rem 0 0;
+}
+.signup-link a {
+  color: var(--gold);
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.signup-link a:hover { color: var(--gold-bright); text-decoration: underline; }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 480px) {
+  .login-container { padding: 1.8rem 1.6rem 2.2rem; }
+  .login-container h1 { font-size: 1.6rem; }
+}

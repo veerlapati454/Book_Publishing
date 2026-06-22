@@ -1,0 +1,321 @@
+/* ═══════════════════════════════════════════════════════════
+   BookVerse – Header.css   (dark theme, matches Home + Footer)
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Tokens (mirror Home.css) ───────────────────────────── */
+:root {
+  --hdr-bg:        rgba(9, 9, 15, 0.72);
+  --hdr-bg-solid:  #09090f;
+  --hdr-border:    rgba(255, 255, 255, 0.07);
+  --gold:          #c9a84c;
+  --gold-light:    #e2c47a;
+  --white:         #f0eeea;
+  --muted:         #7a7a8c;
+  --font-body:     "Inter", "Segoe UI", system-ui, sans-serif;
+  --hdr-h:         68px;
+  --transition:    0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ── Header shell ────────────────────────────────────────── */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  height: var(--hdr-h);
+  background: var(--hdr-bg);
+  backdrop-filter: blur(18px) saturate(1.4);
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+  border-bottom: 1px solid transparent;
+  transition: background var(--transition), border-color var(--transition),
+              box-shadow var(--transition);
+}
+
+/* Elevated state after scroll */
+.header--scrolled {
+  background: rgba(9, 9, 15, 0.95);
+  border-bottom-color: var(--hdr-border);
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.5);
+}
+
+/* ── Inner container ─────────────────────────────────────── */
+.header-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  height: 100%;
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+/* ── Logo ────────────────────────────────────────────────── */
+.logo {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  text-decoration: none;
+}
+.logo img {
+  height: 64px;
+  width: auto;
+  object-fit: contain;
+  filter: brightness(1.1);
+  transition: opacity var(--transition);
+}
+.logo:hover img { opacity: 0.82; }
+
+/* ── Desktop nav ─────────────────────────────────────────── */
+.nav-desktop { flex: 1; display: flex; justify-content: center; }
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-link {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 6px 14px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--muted);
+  text-decoration: none;
+  border-radius: 6px;
+  transition: color var(--transition), background var(--transition);
+  overflow: hidden;
+}
+.nav-link:hover { color: var(--white); background: rgba(255,255,255,0.04); }
+.nav-link.active { color: var(--white); }
+
+/* Animated underline */
+.nav-underline {
+  position: absolute;
+  bottom: 2px;
+  left: 14px;
+  right: 14px;
+  height: 1.5px;
+  background: var(--gold);
+  border-radius: 2px;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.nav-link:hover .nav-underline,
+.nav-link.active .nav-underline { transform: scaleX(1); }
+
+/* ── Right side ──────────────────────────────────────────── */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+/* Login button */
+.login-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 22px;
+  background: var(--gold);
+  color: #0a0a0a;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background var(--transition), transform var(--transition),
+              box-shadow var(--transition);
+}
+.login-btn:hover {
+  background: var(--gold-light);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(201, 168, 76, 0.3);
+}
+.login-btn:active { transform: translateY(0); }
+
+/* ── Hamburger button ────────────────────────────────────── */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--hdr-border);
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 0;
+  /* Ensure tap target is large enough on mobile */
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  transition: background var(--transition), border-color var(--transition);
+}
+.hamburger:hover {
+  background: rgba(255,255,255,0.09);
+  border-color: rgba(255,255,255,0.14);
+}
+
+.hamburger span {
+  display: block;
+  width: 18px;
+  height: 1.5px;
+  background: var(--white);
+  border-radius: 2px;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+              opacity 0.25s ease;
+  transform-origin: center;
+}
+
+/* Animate to X */
+.hamburger--open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.hamburger--open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.hamburger--open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+/* ════════════════════════════════════════════════════════════
+   MOBILE DRAWER OVERLAY
+   ════════════════════════════════════════════════════════════ */
+.mobile-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  top: var(--hdr-h);
+  background: rgba(9, 9, 15, 0.97);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+
+  display: flex;
+  flex-direction: column;
+
+  /* Slide-in from top */
+  transform: translateY(-100%);
+  opacity: 0;
+  /* KEY FIX: use visibility so links are truly non-interactive when hidden */
+  visibility: hidden;
+  pointer-events: none;
+  transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+              opacity 0.3s ease,
+              visibility 0s linear 0.42s;
+}
+.mobile-overlay--open {
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+  pointer-events: all;
+  /* Delay removed when opening so it's immediately interactive */
+  transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+              opacity 0.3s ease,
+              visibility 0s linear 0s;
+}
+
+/* ── Mobile nav list ─────────────────────────────────────── */
+.mobile-nav {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 32px 24px 40px;
+  gap: 4px;
+  height: 100%;
+  /* Allow scrolling if content overflows on small screens */
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.mobile-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.mobile-link {
+  display: block;
+  padding: 16px 20px;
+  font-family: var(--font-body);
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--muted);
+  text-decoration: none;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  /* Ensure tappable area is large enough */
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  transition: color var(--transition), background var(--transition),
+              border-color var(--transition), transform var(--transition);
+}
+.mobile-link:hover,
+.mobile-link:active {
+  color: var(--white);
+  background: rgba(255,255,255,0.05);
+  transform: translateX(4px);
+}
+.mobile-link.active {
+  color: var(--gold);
+  background: rgba(201, 168, 76, 0.07);
+  border-color: rgba(201, 168, 76, 0.2);
+}
+
+.mobile-login-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: var(--gold);
+  color: #0a0a0a;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  border-radius: 10px;
+  text-decoration: none;
+  margin-top: 16px;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  transition: background var(--transition), transform var(--transition);
+}
+.mobile-login-btn:hover,
+.mobile-login-btn:active { background: var(--gold-light); }
+
+/* ════════════════════════════════════════════════════════════
+   RESPONSIVE BREAKPOINTS
+   ════════════════════════════════════════════════════════════ */
+
+/* Tablet — compact desktop nav */
+@media (max-width: 900px) {
+  .header-container { padding: 0 24px; gap: 16px; }
+  .nav-link { padding: 6px 10px; font-size: 13px; }
+}
+
+/* Mobile — hide desktop nav, show hamburger */
+@media (max-width: 680px) {
+  .nav-desktop { display: none; }
+  .header-right .login-btn { display: none; }
+  .hamburger { display: flex; }
+  .header-container { padding: 0 20px; gap: 12px; }
+
+  /* Slightly smaller logo on mobile */
+  .logo img { height: 48px; }
+}
+
+/* Very small screens */
+@media (max-width: 360px) {
+  .header-container { padding: 0 14px; }
+  .logo img { height: 40px; }
+  .mobile-link { font-size: 15px; padding: 14px 16px; }
+}

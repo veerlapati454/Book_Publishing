@@ -1,0 +1,244 @@
+/* ═══════════════════════════════════════════════════════════
+   BookVerse – Footer.css   (dark theme, mirrors Header.css)
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Tokens (identical to Header.css) ───────────────────── */
+:root {
+  --ftr-bg:        #09090f;
+  --ftr-surface:   rgba(255, 255, 255, 0.03);
+  --ftr-border:    rgba(255, 255, 255, 0.07);
+  --gold:          #c9a84c;
+  --gold-light:    #e2c47a;
+  --white:         #f0eeea;
+  --muted:         #7a7a8c;
+  --muted-light:   #a0a0b0;
+  --font-body:     "Inter", "Segoe UI", system-ui, sans-serif;
+  --transition:    0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ── Footer shell ────────────────────────────────────────── */
+.footer {
+  background: var(--ftr-bg);
+  border-top: 1px solid var(--ftr-border);
+  font-family: var(--font-body);
+  color: var(--muted);
+}
+
+/* ── Main grid container ─────────────────────────────────── */
+.footer-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 64px 40px 48px;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 48px 64px;
+  align-items: start;
+}
+
+/* ── Brand column ────────────────────────────────────────── */
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.footer-logo {
+  display: inline-flex;
+  cursor: pointer;
+  width: fit-content;
+  transition: opacity var(--transition);
+}
+.footer-logo:hover { opacity: 0.8; }
+.footer-logo img {
+  height: 56px;
+  width: auto;
+  object-fit: contain;
+  filter: brightness(1.1);
+}
+
+.footer-tagline {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--muted);
+  max-width: 280px;
+  margin: 0;
+}
+
+/* ── Social icons ────────────────────────────────────────── */
+.footer-social {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.social-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  border: 1px solid var(--ftr-border);
+  background: var(--ftr-surface);
+  color: var(--muted);
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  transition: color var(--transition), border-color var(--transition),
+              background var(--transition), transform var(--transition);
+}
+.social-icon:hover {
+  color: var(--gold);
+  border-color: rgba(201, 168, 76, 0.35);
+  background: rgba(201, 168, 76, 0.07);
+  transform: translateY(-2px);
+}
+.social-icon:active { transform: translateY(0); }
+
+/* ── Link columns (Quick Links + Contact) ───────────────── */
+.footer-links,
+.footer-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.footer-links h3,
+.footer-contact h3 {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--white);
+  margin: 0;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--ftr-border);
+}
+
+/* Nav links */
+.footer-links ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.footer-links a {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--muted);
+  text-decoration: none;
+  padding: 5px 0;
+  position: relative;
+  transition: color var(--transition), padding-left var(--transition);
+}
+.footer-links a::before {
+  content: "";
+  position: absolute;
+  left: -12px;
+  top: 50%;
+  transform: translateY(-50%) scaleX(0);
+  transform-origin: left;
+  width: 6px;
+  height: 1.5px;
+  background: var(--gold);
+  border-radius: 2px;
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+              opacity 0.25s ease;
+  opacity: 0;
+}
+.footer-links a:hover {
+  color: var(--white);
+  padding-left: 14px;
+}
+.footer-links a:hover::before {
+  transform: translateY(-50%) scaleX(1);
+  opacity: 1;
+}
+
+/* Contact info */
+.footer-contact p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--muted-light);
+}
+.footer-contact p + p {
+  margin-top: 4px;
+}
+
+/* ── Bottom bar ──────────────────────────────────────────── */
+.footer-bottom {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 20px 40px;
+  border-top: 1px solid var(--ftr-border);
+  font-size: 12px;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* ════════════════════════════════════════════════════════════
+   RESPONSIVE BREAKPOINTS
+   ════════════════════════════════════════════════════════════ */
+
+/* Tablet — collapse to 2 columns */
+@media (max-width: 900px) {
+  .footer-container {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px 40px;
+    padding: 48px 24px 40px;
+  }
+  /* Brand spans full width on tablet */
+  .footer-brand {
+    grid-column: 1 / -1;
+  }
+  .footer-bottom {
+    padding: 20px 24px;
+  }
+}
+
+/* Mobile — single column stack */
+@media (max-width: 580px) {
+  .footer-container {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    padding: 40px 20px 32px;
+  }
+  .footer-brand {
+    grid-column: auto;
+  }
+  .footer-tagline {
+    max-width: 100%;
+  }
+  .footer-logo img {
+    height: 46px;
+  }
+  .footer-bottom {
+    padding: 16px 20px;
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 360px) {
+  .footer-container { padding: 32px 14px 28px; }
+  .footer-bottom { padding: 14px; }
+}
+
+/* ── Reduced motion ──────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .social-icon,
+  .footer-links a,
+  .footer-links a::before {
+    transition: none;
+  }
+}

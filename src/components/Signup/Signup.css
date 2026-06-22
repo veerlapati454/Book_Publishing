@@ -1,0 +1,413 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600;700&display=swap');
+
+/* ============================================================
+   TOKENS (mirrors Books.css / Login.css / Contact.css)
+   ============================================================ */
+.signup-page {
+  --ink: #0c0b0a;
+  --surface: #15130f;
+  --surface-2: #1c1914;
+  --card: #181511;
+  --border: rgba(201, 162, 75, 0.14);
+  --border-soft: rgba(237, 231, 220, 0.08);
+  --gold: #c9a24b;
+  --gold-bright: #e6c374;
+  --paper: #ede7dc;
+  --paper-dim: #b3ad9f;
+  --muted: #847d6e;
+  --error: #d97a6c;
+  --shadow: 0 20px 60px -20px rgba(0, 0, 0, 0.7);
+
+  --serif: 'Fraunces', Georgia, serif;
+  --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--sans);
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 2rem;
+  padding-top: clamp(3rem, 7vh, 5rem);
+  padding-bottom: 4rem;
+  overflow-x: hidden;
+  margin-top: 50px;
+}
+
+.signup-page * { box-sizing: border-box; }
+
+.signup-page::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.signup-page::after {
+  content: "";
+  position: fixed;
+  inset: -20% -10%;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 50% 45% at 82% 10%, rgba(201, 162, 75, 0.12), transparent 70%),
+    radial-gradient(ellipse 45% 40% at 12% 95%, rgba(201, 162, 75, 0.07), transparent 70%);
+}
+
+/* ============================================================
+   CARD
+   ============================================================ */
+.signup-container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 460px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  padding: 2rem 2.6rem 2.6rem;
+  text-align: center;
+  animation: riseIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes riseIn {
+  from { opacity: 0; transform: translateY(18px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ============================================================
+   BACK BUTTON
+   ============================================================ */
+.signup-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--paper-dim);
+  text-decoration: none;
+  margin-bottom: 1.5rem;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+.signup-back-btn:hover {
+  color: var(--gold-bright);
+  transform: translateX(-2px);
+}
+.signup-back-btn svg { font-size: 0.9rem; }
+
+.signup-icon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 1.4rem;
+  border-radius: 50%;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  box-shadow: 0 0 0 6px rgba(201, 162, 75, 0.05);
+}
+
+.signup-container h1 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 1.85rem;
+  color: var(--paper);
+  margin: 0 0 0.45rem;
+  line-height: 1.2;
+}
+
+.signup-container > p {
+  font-size: 0.92rem;
+  color: var(--paper-dim);
+  margin: 0 0 2rem;
+}
+
+/* ============================================================
+   FORM
+   ============================================================ */
+.signup-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  text-align: left;
+}
+
+.signup-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.signup-input-group label {
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--paper-dim);
+}
+
+.signup-input-group input {
+  width: 100%;
+  background: var(--surface-2);
+  border: 1px solid var(--border-soft);
+  border-radius: 9px;
+  padding: 0.8rem 1rem;
+  font-family: var(--sans);
+  font-size: 0.92rem;
+  color: var(--paper);
+  outline: none;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+.signup-input-group input::placeholder { color: var(--muted); }
+.signup-input-group input:focus {
+  border-color: var(--gold);
+  background: var(--card);
+}
+
+/* ── Password fields with eye toggle ── */
+.password-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.password-wrapper input {
+  width: 100%;
+  padding-right: 2.6rem;
+  background: var(--surface-2);
+  border: 1px solid var(--border-soft);
+  border-radius: 9px;
+  padding-top: 0.8rem;
+  padding-bottom: 0.8rem;
+  padding-left: 1rem;
+  font-family: var(--sans);
+  font-size: 0.92rem;
+  color: var(--paper);
+  outline: none;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+.password-wrapper input::placeholder { color: var(--muted); }
+.password-wrapper input:focus {
+  border-color: var(--gold);
+  background: var(--card);
+}
+
+/* ── Disable Edge/IE's native "reveal password" icon ──
+   Edge (Chromium) injects its own eye toggle inside
+   type="password" inputs. Without this, it renders on
+   top of / next to our custom .eye-btn, producing a
+   double-eye-icon look. */
+.password-wrapper input[type="password"]::-ms-reveal,
+.password-wrapper input[type="password"]::-ms-clear {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+.eye-btn {
+  position: absolute;
+  right: 12px;
+  background: none;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 0.95rem;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: color 0.2s ease;
+  z-index: 2;
+}
+.eye-btn:hover { color: var(--gold-bright); }
+
+/* ============================================================
+   TERMS CHECKBOX
+   ============================================================ */
+.terms-box {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-top: 0.2rem;
+}
+
+.terms-box input[type="checkbox"] {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  border: 1px solid var(--border-soft);
+  border-radius: 5px;
+  background: var(--surface-2);
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+}
+.terms-box input[type="checkbox"]:hover {
+  border-color: var(--gold);
+}
+.terms-box input[type="checkbox"]:checked {
+  background: var(--gold);
+  border-color: var(--gold);
+}
+.terms-box input[type="checkbox"]:checked::after {
+  content: "✓";
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #161310;
+}
+
+.terms-box label {
+  font-size: 0.85rem;
+  color: var(--paper-dim);
+  cursor: pointer;
+}
+
+/* ============================================================
+   ERROR MESSAGE
+   ============================================================ */
+.signup-error {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(217, 122, 108, 0.1);
+  border: 1px solid rgba(217, 122, 108, 0.3);
+  color: var(--error);
+  font-size: 0.84rem;
+  font-weight: 500;
+  padding: 0.75rem 1rem;
+  border-radius: 9px;
+  margin: 0;
+  animation: shake 0.3s ease;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+
+/* ============================================================
+   SUBMIT BUTTON
+   ============================================================ */
+.signup-btn {
+  font-family: var(--sans);
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #161310;
+  background: linear-gradient(180deg, var(--gold-bright), var(--gold));
+  border: none;
+  border-radius: 9px;
+  padding: 0.9rem 1.8rem;
+  cursor: pointer;
+  margin-top: 0.2rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+  box-shadow: 0 8px 24px -8px rgba(201, 162, 75, 0.45);
+}
+.signup-btn:hover { transform: translateY(-2px); filter: brightness(1.06); }
+.signup-btn:active { transform: translateY(0); }
+
+/* ============================================================
+   DIVIDER
+   ============================================================ */
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 0.4rem 0;
+}
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--border-soft);
+}
+.divider span {
+  padding: 0 1rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+
+/* ============================================================
+   SOCIAL BUTTONS
+   ============================================================ */
+.social-buttons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.7rem;
+}
+
+.social-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.8rem 0.5rem;
+  border-radius: 9px;
+  border: 1px solid var(--border-soft);
+  background: var(--surface-2);
+  color: var(--paper-dim);
+  font-size: 0.74rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.social-btn svg { font-size: 1rem; }
+
+.social-btn:hover {
+  transform: translateY(-2px);
+  border-color: var(--border);
+  color: var(--paper);
+  background: var(--card);
+}
+
+.social-btn.google:hover { color: #e8a499; border-color: rgba(232, 164, 153, 0.4); }
+.social-btn.facebook:hover { color: #8ab4e8; border-color: rgba(138, 180, 232, 0.4); }
+.social-btn.github:hover { color: var(--gold-bright); border-color: var(--gold); }
+
+/* ============================================================
+   LOGIN LINK
+   ============================================================ */
+.login-link {
+  text-align: center;
+  font-size: 0.86rem;
+  color: var(--paper-dim);
+  margin: 0.2rem 0 0;
+}
+.login-link a {
+  color: var(--gold);
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.login-link a:hover { color: var(--gold-bright); text-decoration: underline; }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 480px) {
+  .signup-container { padding: 1.8rem 1.5rem 2.2rem; }
+  .signup-container h1 { font-size: 1.55rem; }
+  .social-buttons { grid-template-columns: 1fr; }
+  .social-btn { flex-direction: row; }
+}
