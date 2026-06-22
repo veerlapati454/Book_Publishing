@@ -152,11 +152,14 @@ export default function Dashboard() {
             const Icon = item.icon;
             return (
               <Link
-                key={item.label}
-                to={item.to}
-                className={`dash-nav-item${item.active ? " active" : ""}`}
-                onClick={() => setSidebarOpen(false)}
-              >
+  key={item.label}
+  to={item.to}
+  className={`dash-nav-item${item.active ? " active" : ""}`}
+  onClick={() => {
+    setSidebarOpen(false);
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }}
+>
                 <Icon className="dash-nav-icon" />
                 <span>{item.label}</span>
                 {item.active && <span className="dash-nav-dot" />}
