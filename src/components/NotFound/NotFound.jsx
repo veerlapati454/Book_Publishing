@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import "./NotFound.css";
-
+import { Link } from "react-router-dom";
 /* ── Falling pages particle system ── */
 function useCanvas() {
   const ref = useRef(null);
@@ -175,12 +175,12 @@ export default function NotFound() {
               Previous Page
             </button>
 
-            <a className="nf-btn nf-btn--primary" href="/">
+            <Link className="nf-btn nf-btn--primary" to="/">
               <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true">
                 <path d="M1.5 6L7.5 1.5L13.5 6V13H9.5V9.5H5.5V13H1.5V6Z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round"/>
               </svg>
               Return to Home
-            </a>
+            </Link>
           </div>
         </div>
       </main>
