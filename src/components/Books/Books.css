@@ -49,8 +49,18 @@
   transform: translateY(28px);
   transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1) var(--delay, 0ms),
               transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) var(--delay, 0ms);
+  /* Ensure the wrapper never distorts grid cell sizing */
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 .reveal.revealed { opacity: 1; transform: translateY(0); }
+
+/* Book cards inside reveal must fill the full cell height */
+.books-grid .reveal > .book-card {
+  flex: 1;
+  height: 100%;
+}
 
 @media (prefers-reduced-motion: reduce) {
   .reveal { transition: none; opacity: 1; transform: none; }
@@ -275,6 +285,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 1.9rem;
+  align-items: start;
 }
 
 .book-card {
@@ -426,15 +437,6 @@
 
 /* ============================================================
    BUTTONS
-   Note: .btn-primary / .btn-ghost here use a different visual
-   language (serif-adjacent gradient gold + glow shadow) than
-   Home.css / About.css (flat gold + outline). That's intentional
-   for this page's design, but it means these class names are
-   NOT visually interchangeable across pages even though the
-   names match. Since CSS imports apply globally, whichever
-   page's stylesheet loaded last wins if both are present in
-   the same bundle — keep that in mind if buttons ever look
-   "wrong" on one page after editing another.
    ============================================================ */
 .btn-primary {
   font-family: var(--sans);
@@ -517,7 +519,7 @@
   align-items: center;
   justify-content: center;
   padding: 1.5rem;
-  z-index: 100;
+  z-index: 9999;
   animation: fadeIn 0.25s ease;
 }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -531,6 +533,7 @@
   max-height: 88vh;
   overflow-y: auto;
   position: relative;
+  z-index: 10000;
   box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.8);
   animation: riseIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -551,7 +554,7 @@
   color: var(--paper);
   font-size: 0.9rem;
   cursor: pointer;
-  z-index: 5;
+  z-index: 10001;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -690,7 +693,18 @@
   .results-count { padding: 0 1rem; }
 
   .books-grid-section { padding: 2rem 1rem 3rem; }
-  .books-grid { grid-template-columns: repeat(2, 1fr); gap: 0.85rem; }
+
+  /* ── FIX: always keep 2-column grid on phones ── */
+  .books-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.85rem;
+  }
+
+  /* If a card ends up alone in the last row, stretch it full width */
+  .books-grid > *:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+
   .book-info { padding: 1rem 1rem 1.1rem; }
   .book-title { font-size: 1rem; }
   .book-author { font-size: 0.8rem; margin-bottom: 0.7rem; }
@@ -717,6 +731,20 @@
   .modal-actions .btn-ghost { width: 100%; padding: 0.8rem 1.4rem; }
 }
 
+/* Very small phones — stay 2-col, never drop to 1 unless truly tiny */
 @media (max-width: 380px) {
+  .books-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.65rem;
+  }
+}
+
+/* Extremely narrow (e.g. Galaxy Fold closed) */
+@media (max-width: 280px) {
   .books-grid { grid-template-columns: 1fr; }
+
+  /* Reset the odd-card rule since we're in single column */
+  .books-grid > *:last-child:nth-child(odd) {
+    grid-column: auto;
+  }
 }
