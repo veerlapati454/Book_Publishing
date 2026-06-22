@@ -95,7 +95,7 @@ const books = [
     rating: 4.4,
     description: "A former startup founder dismantles hustle-culture myths and offers a quieter, more durable framework for professional fulfilment.",
     image: img8,
-    badge: "Trending",
+  
   },
   {
     id: 6,

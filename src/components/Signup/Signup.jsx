@@ -85,7 +85,6 @@ function Signup() {
       return;
     }
 
-    alert("Registration Successful!");
 
     navigate("/404");
   };
